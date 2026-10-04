@@ -1,0 +1,17 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "url",
+        "url": "https://github.com/ZarafshanGul/shezan-beverages-wp/archive/refs/heads/main.zip"
+      }
+    },
+    {
+      "step": "activateTheme",
+      "themeFolderName": "shezan-theme"
+    }
+  ]
+}
