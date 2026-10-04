@@ -3,11 +3,8 @@
   "landingPage": "/",
   "steps": [
     {
-      "step": "installTheme",
-      "themeZipFile": {
-        "resource": "url",
-        "url": "https://github.com/ZarafshanGul/shezan-beverages-wp/archive/refs/heads/main.zip"
-      }
+      "step": "runPHP",
+      "code": "<?php\n$zip = file_get_contents('https://github.com/ZarafshanGul/shezan-beverages-wp/archive/refs/heads/main.zip');\nfile_put_contents('/tmp/shezan.zip', $zip);\n$zip = new ZipArchive();\n$zip->open('/tmp/shezan.zip');\n$zip->extractTo('/tmp/shezan-repo');\n$zip->close();\n$source = '/tmp/shezan-repo/shezan-beverages-wp-main/shezan-theme';\n$destination = '/wordpress/wp-content/themes/shezan-theme';\nfunction copyTheme($source, $destination) {\n    if (!is_dir($destination)) mkdir($destination, 0777, true);\n    foreach (scandir($source) as $file) {\n        if ($file === '.' || $file === '..') continue;\n        $src = $source . '/' . $file;\n        $dst = $destination . '/' . $file;\n        if (is_dir($src)) copyTheme($src, $dst);\n        else copy($src, $dst);\n    }\n}\ncopyTheme($source, $destination);\n?>"
     },
     {
       "step": "activateTheme",
